@@ -22,7 +22,7 @@ class MainView extends StatelessWidget {
   Widget _controlPanel(context, {double width = 320}) {
    return Container(
     width: width,
-    color: const Color.fromARGB(255, 56, 56, 109),
+    color: const Color.fromARGB(255, 202, 237, 4),
     child: Column(
       children: [
         Text("Receptsök"),
@@ -30,18 +30,9 @@ class MainView extends StatelessWidget {
           alignment: Alignment.centerLeft,
           child: Text("Hitta ett recept som passar genom att ändra inställningarna nedanför"),
         ),
-        Row(
-          children: [
-            Text("Ingridiens"),
-            IngredientControl(),
-          ],
-        ),
-        Row(
-          children: [
-            Text("Kök"),
-            KitchenControl(),
-          ],
-        ),
+          IngredientControl(),
+          KitchenControl(),
+          
         Text("Svårighetsgrad"),
         DifficultyControl(),
 
