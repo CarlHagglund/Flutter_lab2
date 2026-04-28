@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lab2/model/recipe_database/recipe_handler.dart';
 import 'package:provider/provider.dart';
+import 'package:lab2/app_theme.dart';
 
 class PriceControl extends StatefulWidget {
   const PriceControl({super.key});
@@ -30,7 +31,16 @@ class _PriceControlState extends State<PriceControl> {
             recipeHandler.setMaxPrice(value.round());
           },
         ),
-        Text('${_price.round()} kr'),
+       Row(
+  mainAxisAlignment: MainAxisAlignment.end,
+  children: [
+    Padding(
+      padding: const EdgeInsets.only(right: AppTheme.paddingLarge),
+      child: Text('${_price.round()} kr'),
+    ),
+  ],
+),
+
       ],
   );
   }

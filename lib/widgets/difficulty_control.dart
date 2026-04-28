@@ -17,7 +17,7 @@ class _DifficultyControlState extends State<DifficultyControl> {
     Widget build(BuildContext context) {
 
       var recipeHandler = Provider.of<RecipeHandler>(context, listen: false);
-      
+
       return RadioGroup<String>(
         groupValue: _difficulty,
         onChanged: (value) {
@@ -27,15 +27,23 @@ class _DifficultyControlState extends State<DifficultyControl> {
           recipeHandler.setDifficulty(value!);
         },
         child: Column(
-          children: [
-            for (final label in Difficulty.labels)
-              RadioListTile<String>(
-                dense: true,
-                title: Text(label),
-                value: label,
+  children: [
+    for (int i = 0; i < Difficulty.labels.length; i++)
+      RadioListTile<String>(
+        dense: true,
+        value: Difficulty.labels[i],
+        title: Difficulty.icons[i] == null
+            ? Text(Difficulty.labels[i])
+            : Row(
+                children: [
+                  Difficulty.icons[i]!,
+                  SizedBox(width: 12),
+                  Text(Difficulty.labels[i]),
+                ],
               ),
-          ],
-        ),
+      ),
+  ],
+),
       );
     }
 }
