@@ -37,6 +37,8 @@ class IngredientControl extends StatelessWidget {
           recipeHandler.setMainIngredient(value);
         },
       ),
+      SizedBox(width: AppTheme.paddingHuge,),
+      SizedBox(width: AppTheme.paddingHuge,)
     ]
 );
     

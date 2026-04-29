@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lab2/widgets/difficulty_control.dart';
 import 'package:lab2/widgets/ingredient_control.dart';
 import 'package:lab2/widgets/kitchen_control.dart';
+import 'package:lab2/widgets/logo.dart';
 import 'package:lab2/widgets/price_control.dart';
 import 'package:lab2/widgets/recipe_list.dart';
 import 'package:lab2/widgets/time_control.dart';
@@ -20,31 +21,41 @@ class MainView extends StatelessWidget {
     );
 }
   Widget _controlPanel(context, {double width = 320}) {
-   return Container(
+  return Container(
     width: width,
     color: const Color.fromARGB(255, 202, 237, 4),
-    child: Column(
-      children: [
-        Text("Receptsök"),
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Text("Hitta ett recept som passar genom att ändra inställningarna nedanför"),
-        ),
+    child: Padding(
+      padding: const EdgeInsets.symmetric(vertical: 16),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Logo(),
+          Text("Receptsök"),
+          Align(
+            alignment: Alignment.center,
+            child: Text("Hitta ett recept som passar genom att ändra inställningarna nedanför"),
+          ),
           IngredientControl(),
           KitchenControl(),
-          
-        Text("Svårighetsgrad"),
-        DifficultyControl(),
+          Padding(
+            padding: const EdgeInsets.only(left: 16),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text("Svårighetsgrad",
+               style: TextStyle(fontWeight: FontWeight.bold)),
+            ),
+          ),
+          DifficultyControl(),
+          Text("Maxpris:"),
+          PriceControl(),
+          Text("Maxtid:"),
+          TimeControl(),
+        ],
+      ),
+    ),
+  );
 
-        Text("Maxpris:"),
-        PriceControl(),
-        Text("Maxtid:"),
-        TimeControl(),
-      ],
-    )
-   );
-}
-
+  }
 }
 
 class RecipeArea extends StatelessWidget {
