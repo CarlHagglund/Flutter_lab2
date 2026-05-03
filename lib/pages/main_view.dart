@@ -41,7 +41,6 @@ Widget _controlPanel(context, {double width = 320}) {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Logo(),
-          Text("Receptsök", textAlign: TextAlign.center, style: AppTheme.smallHeading,),
           Text(
             "Hitta ett recept som passar genom att ändra\ninställningarna nedanför",
             textAlign: TextAlign.center,
@@ -102,12 +101,24 @@ class RecipeArea extends StatelessWidget {
   Widget build(BuildContext context) {
     var uiController = context.watch<UIController>();
     Widget contents;
+    String heading;
 
     if (uiController.showRecipeList) {
       contents = RecipeList();
+      heading = "Receptlista";
     } else {
       contents = RecipeDetail(uiController.selectedRecipe!);
+      heading = uiController.selectedRecipe!.name;
     }
-    return Expanded(child: contents);
+
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(heading, style: AppTheme.mediumHeading),
+          Expanded(child: contents),
+        ],
+      ),
+    );
   }
 }

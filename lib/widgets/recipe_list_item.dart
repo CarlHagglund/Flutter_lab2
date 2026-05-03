@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:lab2/app_theme.dart';
 import 'package:lab2/model/recipe_database/recipe.dart';
 import 'package:lab2/util/cuisine.dart';
+import 'package:lab2/util/difficulty.dart';
+import 'package:lab2/util/main_ingredient.dart';
 
 
 class RecipeListItem extends StatelessWidget {
@@ -23,7 +25,10 @@ Widget build(BuildContext context) {
       height: 128,
       child: Row(
         children: [
+        SizedBox(width: AppTheme.paddingMedium),
         _image(recipe),
+          SizedBox(width: AppTheme.paddingMedium),
+
         Expanded(
           child: Column( mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -33,7 +38,16 @@ Widget build(BuildContext context) {
                 overflow: TextOverflow.ellipsis, 
                 maxLines: 2,
               ),
-              Row(children: [Text('Lite mer grejer')]),
+              Row(children: [
+    MainIngredient.icon(recipe.mainIngredient, width: 20)!,
+    Difficulty.icon(recipe.difficulty, width: 48) ?? SizedBox.shrink(),
+    SizedBox(width: 8),
+    Text('${recipe.time} minuter'),
+    SizedBox(width: 8),
+    Text('${recipe.price}kr'),
+    SizedBox(width: 8),
+  ],
+),
             ],
           ),
          ),
@@ -48,7 +62,7 @@ Widget _image(Recipe recipe) {
   var square = ClipRRect(
     borderRadius: BorderRadius.circular(12),
     child: ClipRect(
-      child: Container(
+      child: SizedBox(
         width: 104,
         height: 104,
         child: FittedBox(fit: BoxFit.cover, child: recipe.image),
