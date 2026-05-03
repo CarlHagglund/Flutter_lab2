@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lab2/app_theme.dart';
 import 'package:lab2/widgets/difficulty_control.dart';
 import 'package:lab2/widgets/ingredient_control.dart';
 import 'package:lab2/widgets/kitchen_control.dart';
@@ -15,12 +16,22 @@ class MainView extends StatelessWidget {
   const MainView({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-    body: Row(children: [_controlPanel(context), RecipeArea()]),
-    );
+Widget build(BuildContext context) {
+  return Scaffold(
+    body: Padding(
+      padding: EdgeInsets.all(AppTheme.paddingMedium),
+      child: Row(
+        children: [
+          _controlPanel(context),
+          SizedBox(width: AppTheme.paddingSmall),
+          RecipeArea(),
+        ],
+      ),
+    ),
+  );
 }
-  Widget _controlPanel(context, {double width = 320}) {
+
+Widget _controlPanel(context, {double width = 320}) {
   return Container(
     width: width,
     color: const Color.fromARGB(255, 202, 237, 4),
@@ -30,34 +41,58 @@ class MainView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Logo(),
-          Text("Receptsök", textAlign: TextAlign.center),
-
-          Text("Hitta ett recept som passar genom att ändra inställningarna nedanför", 
-          textAlign: TextAlign.center),
-
-          IngredientControl(),
-
-          KitchenControl(),
-
-          Padding(
-            padding: const EdgeInsets.only(left: 16),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Text("Svårighetsgrad",
-               style: TextStyle(fontWeight: FontWeight.bold)),
-            ),
+          Text("Receptsök", textAlign: TextAlign.center, style: AppTheme.smallHeading,),
+          Text(
+            "Hitta ett recept som passar genom att ändra\ninställningarna nedanför",
+            textAlign: TextAlign.center,
           ),
-          DifficultyControl(),
-          Text("Maxpris:"),
-          PriceControl(),
-          Text("Maxtid:"),
-          TimeControl(),
+          IngredientControl(),
+          KitchenControl(),
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 16),
+                child: Text("Svårighetsgrad",
+                    style: AppTheme.smallHeading),
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: 16 ,horizontal: AppTheme.paddingMedium),
+            child: DifficultyControl(),
+          ),
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 16),
+                child: Text("Maxpris:",
+                    style: AppTheme.smallHeading)),
+              
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16 ,horizontal: AppTheme.paddingMedium),
+            child: PriceControl(),
+          ),
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 16),
+                child: Text("Maxtid:",
+                    style: AppTheme.smallHeading),
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16 ,horizontal: AppTheme.paddingMedium),
+            child: TimeControl(),
+          ),
         ],
       ),
     ),
   );
-
-  }
+}
 }
 
 class RecipeArea extends StatelessWidget {
