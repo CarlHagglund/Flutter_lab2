@@ -30,13 +30,15 @@ class MainView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Logo(),
-          Text("Receptsök"),
-          Align(
-            alignment: Alignment.center,
-            child: Text("Hitta ett recept som passar genom att ändra inställningarna nedanför"),
-          ),
+          Text("Receptsök", textAlign: TextAlign.center),
+
+          Text("Hitta ett recept som passar genom att ändra inställningarna nedanför", 
+          textAlign: TextAlign.center),
+
           IngredientControl(),
+
           KitchenControl(),
+
           Padding(
             padding: const EdgeInsets.only(left: 16),
             child: Align(

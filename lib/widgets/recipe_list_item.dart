@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:lab2/app_theme.dart';
 import 'package:lab2/model/recipe_database/recipe.dart';
+import 'package:lab2/util/cuisine.dart';
 
 
 class RecipeListItem extends StatelessWidget {
@@ -9,12 +11,54 @@ class RecipeListItem extends StatelessWidget {
   final void Function() onTap;
 
   @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      leading: recipe.image,
-      title: Text(recipe.name),
-      onTap: onTap,
-      shape: Border.all(),
+Widget build(BuildContext context) {
+  return Card(
+  elevation: 4,
+  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+  child: InkWell( // Nytt
+    borderRadius: BorderRadius.circular(12),
+    splashColor: Colors.blue.withAlpha(30),
+    onTap: onTap,
+    child: Container(
+      height: 128,
+      child: Row(
+        children: [
+        _image(recipe),
+        Expanded(
+          child: Column( mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(recipe.name, style: AppTheme.mediumHeading,),
+              Text(
+                recipe.description,
+                overflow: TextOverflow.ellipsis, 
+                maxLines: 2,
+              ),
+              Row(children: [Text('Lite mer grejer')]),
+            ],
+          ),
+         ),
+       ],
+     ),
+    ),
+  ),
+  );
+
+}
+Widget _image(Recipe recipe) {
+  var square = ClipRRect(
+    borderRadius: BorderRadius.circular(12),
+    child: ClipRect(
+      child: Container(
+        width: 104,
+        height: 104,
+        child: FittedBox(fit: BoxFit.cover, child: recipe.image),
+      ),
+    ),
+  );
+  var flagImage = Cuisine.flag(recipe.cuisine, width: 24.0);
+
+  return Stack(
+    children: [square, Positioned(bottom: 8, right: 8, child: flagImage!)],
   );
 }
 }
