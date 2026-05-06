@@ -34,7 +34,7 @@ class KitchenControl extends StatelessWidget {
           ),
         ],
         onSelected: (value){
-          recipeHandler.setMainIngredient(value);
+          recipeHandler.setCuisine(value);
         },
       ),
             SizedBox(width: AppTheme.paddingHuge,),
